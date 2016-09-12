@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "rest-endpoint"
+  labels:
+    app: irods-rest
+    type: rest
+spec:
+  containers:
+    - name: irods-rest
+      image: "diceunc/irods-rest:4.0.2.5"
+      ports:
+        - name: http
+          containerPort: 8080
+      livenessProbe:
+        httpGet:
+          path: /irods-rest/rest/service
+          port: 8080
+          scheme: HTTP
+        initialDelaySeconds: 5
+        periodSeconds: 15
+        timeoutSeconds: 5
+  volumes:
+    - name: "nginx-proxy-conf"
+      configMap:
+        name: "nginx-proxy-conf"
+        items:
+          - key: "proxy.conf"
+            path: "proxy.conf"
