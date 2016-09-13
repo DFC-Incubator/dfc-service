@@ -20,10 +20,3 @@ spec:
         initialDelaySeconds: 5
         periodSeconds: 15
         timeoutSeconds: 5
-  volumes:
-    - name: "nginx-proxy-conf"
-      configMap:
-        name: "nginx-proxy-conf"
-        items:
-          - key: "proxy.conf"
-            path: "proxy.conf"
