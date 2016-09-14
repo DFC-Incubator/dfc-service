@@ -5,6 +5,7 @@ metadata:
   labels:
     app: irods-rest
     type: rest
+    layer: mid-tier
 spec:
   containers:
     - name: irods-rest
@@ -12,11 +13,10 @@ spec:
       ports:
         - name: http
           containerPort: 8080
-      livenessProbe:
-        httpGet:
-          path: /irods-rest/rest/service
-          port: 8080
-          scheme: HTTP
-        initialDelaySeconds: 5
-        periodSeconds: 15
-        timeoutSeconds: 5
+      volumeMounts:
+        - name: "rest-backend-config"
+          mountPath: "/etc/irods-ext"
+  volumes:
+      - name: "rest-backend-config"
+        secret:
+          secretName: "rest-backend-config"

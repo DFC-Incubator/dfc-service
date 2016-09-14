@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: irods-rest-service
+spec:
+  selector:
+    app: irods-rest
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
