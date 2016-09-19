@@ -4,8 +4,6 @@ metadata:
   name: "rest-endpoint"
   labels:
     app: irods-rest
-    type: rest
-    layer: mid-tier
 spec:
   containers:
     - name: irods-rest
